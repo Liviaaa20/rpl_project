@@ -1,0 +1,11 @@
+{% extends 'mahasiswa/base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="hero">
+        <img src="{% static 'mahasiswa/img/logo.png' %}" alt="logo" class="logo">
+        <h2>Selamat Datang di Lab RPL</h2>
+        <p>Halaman ini menampilkan contoh sederhana Django template dengan CSS dan JavaScript untuk interaksi tombol.</p>
+        <button id="learn-btn" class="btn">Mulai</button>
+    </section>
+{% endblock %}

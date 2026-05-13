@@ -1,0 +1,23 @@
+{% extends 'mahasiswa/base.html' %} {% load static %} {% block content %}
+<h2>Daftar Mahasiswa</h2>
+<table border="1">
+  <tr>
+    <th>NIM</th>
+    <th>Nama</th>
+    <th>Program Studi</th>
+    <th>Angkatan</th> 
+  </tr>
+  {% for mhs in mahasiswas %}
+  <tr>
+    <td>{{ mhs.nim }}</td>
+    <td>{{ mhs.nama }}</td>
+    <td>{{ mhs.programstudi }}</td>
+    <td>{{ mhs.angkatan }}</td> 
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="3">Belum ada data.</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
