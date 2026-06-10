@@ -1,0 +1,46 @@
+{% extends 'mahasiswa/base.html' %} {% load static %} {% block content %}
+<div class="confirm-box">
+    <h2 style="text-align: left; color: #2c3e50; text-shadow: none; margin-bottom: 30px;">
+        <i class="fas fa-trash-alt"></i> Konfirmasi Hapus Mahasiswa
+    </h2>
+
+    <div class="confirm-warning">
+        <i class="fas fa-exclamation-triangle"></i>
+        <div>
+            <strong>Perhatian!</strong>
+            <p>Apakah Anda yakin ingin menghapus mahasiswa ini? Data yang dihapus tidak dapat dipulihkan.</p>
+        </div>
+    </div>
+
+    <div class="confirm-details">
+        <p>
+            <strong><i class="fas fa-id-card"></i> NIM:</strong>
+            {{ mahasiswa.nim }}
+        </p>
+        <p>
+            <strong><i class="fas fa-user"></i> Nama:</strong>
+            {{ mahasiswa.nama }}
+        </p>
+        <p>
+            <strong><i class="fas fa-graduation-cap"></i> Program Studi:</strong>
+            {{ mahasiswa.programstudi }}
+        </p>
+        <p>
+            <strong><i class="fas fa-calendar"></i> Angkatan:</strong>
+            {{ mahasiswa.angkatan }}
+        </p>
+    </div>
+
+    <div class="form-actions">
+        <form method="POST" style="flex: 1;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-delete" style="width: 100%;">
+                <i class="fas fa-check"></i> Ya, Hapus
+            </button>
+        </form>
+        <a href="{% url 'daftar_mahasiswa' %}" class="btn btn-cancel" style="flex: 1;">
+            <i class="fas fa-times"></i> Batal
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'mahasiswa/base.html' %} {% load static %} {% block content %}
+<div class="form-container">
+    <h2 style="text-align: left; color: #2c3e50; text-shadow: none; margin-bottom: 30px;">
+        {% if mahasiswa %}
+            <i class="fas fa-edit"></i> Edit Mahasiswa
+        {% else %}
+            <i class="fas fa-user-plus"></i> Tambah Mahasiswa
+        {% endif %}
+    </h2>
+
+    {% if error %}
+    <div class="error-message">
+        <i class="fas fa-exclamation-circle"></i>
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="nim"><i class="fas fa-id-card"></i> NIM:</label>
+            <input type="text" id="nim" name="nim" value="{% if mahasiswa %}{{ mahasiswa.nim }}{% endif %}" required placeholder="Contoh: A11.2025.0001">
+        </div>
+        
+        <div class="form-group">
+            <label for="nama"><i class="fas fa-user"></i> Nama:</label>
+            <input type="text" id="nama" name="nama" value="{% if mahasiswa %}{{ mahasiswa.nama }}{% endif %}" required placeholder="Masukkan nama lengkap">
+        </div>
+        
+        <div class="form-group">
+            <label for="programstudi"><i class="fas fa-graduation-cap"></i> Program Studi:</label>
+            <select id="programstudi" name="programstudi" required>
+                <option value="">Pilih Program Studi</option>
+                <option value="Teknik Informatika" {% if mahasiswa.programstudi == 'Teknik Informatika' %}selected{% endif %}>Teknik Informatika</option>
+                <option value="Sistem Informasi" {% if mahasiswa.programstudi == 'Sistem Informasi' %}selected{% endif %}>Sistem Informasi</option>
+                <option value="Teknik Komputer" {% if mahasiswa.programstudi == 'Teknik Komputer' %}selected{% endif %}>Teknik Komputer</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="angkatan"><i class="fas fa-calendar"></i> Angkatan:</label>
+            <input type="number" id="angkatan" name="angkatan" value="{% if mahasiswa %}{{ mahasiswa.angkatan }}{% endif %}" required placeholder="Contoh: 2023" min="2000" max="2050">
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-submit">
+                <i class="fas fa-save"></i>
+                {% if mahasiswa %}Update{% else %}Tambah{% endif %}
+            </button>
+            <a href="{% url 'daftar_mahasiswa' %}" class="btn btn-cancel">
+                <i class="fas fa-times"></i> Batal
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

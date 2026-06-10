@@ -5,19 +5,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}RPL Django{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'mahasiswa/css/style.css' %}">
 </head>
 <body>
-    <header>
-        <h1>Lab RPL - Kelas Praktikum</h1>
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Lab RPL</h1>
+            </div>
+            <nav class="navbar-menu">
+                <a href="{% url 'daftar_mahasiswa' %}" class="nav-link active">Daftar Mahasiswa</a>
+                <a href="{% url 'logout' %}" class="nav-link logout-btn">Logout</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
+    <main class="container">
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
-        <p>&copy; 2025 - Praktikum</p>
+    <footer class="footer">
+        <p>&copy; 2025 - Lab RPL Praktikum Django</p>
     </footer>
 
     <script src="{% static 'mahasiswa/js/main.js' %}"></script>

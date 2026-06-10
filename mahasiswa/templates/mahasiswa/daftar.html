@@ -1,23 +1,53 @@
 {% extends 'mahasiswa/base.html' %} {% load static %} {% block content %}
-<h2>Daftar Mahasiswa</h2>
-<table border="1">
-  <tr>
-    <th>NIM</th>
-    <th>Nama</th>
-    <th>Program Studi</th>
-    <th>Angkatan</th> 
-  </tr>
-  {% for mhs in mahasiswas %}
-  <tr>
-    <td>{{ mhs.nim }}</td>
-    <td>{{ mhs.nama }}</td>
-    <td>{{ mhs.programstudi }}</td>
-    <td>{{ mhs.angkatan }}</td> 
-  </tr>
-  {% empty %}
-  <tr>
-    <td colspan="3">Belum ada data.</td>
-  </tr>
-  {% endfor %}
-</table>
+<h2>📚 Daftar Mahasiswa</h2>
+
+<div class="action-bar">
+    <a href="{% url 'tambah_mahasiswa' %}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Tambah Mahasiswa
+    </a>
+</div>
+
+<div class="table-wrapper">
+    {% if mahasiswas %}
+    <table>
+        <thead>
+            <tr>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Program Studi</th>
+                <th>Angkatan</th>
+                <th style="text-align: center; width: 150px;">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mhs in mahasiswas %}
+            <tr>
+                <td><strong>{{ mhs.nim }}</strong></td>
+                <td>{{ mhs.nama }}</td>
+                <td>{{ mhs.programstudi }}</td>
+                <td>{{ mhs.angkatan }}</td>
+                <td style="text-align: center;">
+                    <div class="actions-cell">
+                        <a href="{% url 'edit_mahasiswa' mhs.pk %}" class="btn btn-edit" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{% url 'hapus_mahasiswa' mhs.pk %}" class="btn btn-delete" title="Hapus">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+        <i class="fas fa-inbox"></i>
+        <p>Belum ada data mahasiswa</p>
+        <a href="{% url 'tambah_mahasiswa' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Tambah Data Pertama
+        </a>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
